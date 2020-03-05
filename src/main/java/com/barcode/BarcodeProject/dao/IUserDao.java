@@ -11,5 +11,5 @@ import com.barcode.BarcodeProject.model.User;
 public interface IUserDao extends JpaRepository<User, Integer>{
 //	User findByEmail(String email);
 //	User findByName(String name);
-	Optional<User> findByEmailAndPassword(String email,String password);
+	Optional<User> findByEmail(String email);
 }

@@ -42,8 +42,8 @@ public interface IUserApi {
     public ResponseEntity<?> getUserById(int userId);
 
     @PostMapping(path = "/home")
-    @ApiOperation(value = "Get an existing user by email and password", response = UserViewDto.class)
+    @ApiOperation(value = "Get an existing user by email ", response = UserViewDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
-    public ResponseEntity<?> findByEmailAndPassword(String email,String password);
+    public ResponseEntity<?> findByEmail(String email);
 
 }
