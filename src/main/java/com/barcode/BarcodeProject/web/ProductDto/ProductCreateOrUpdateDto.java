@@ -2,13 +2,15 @@ package com.barcode.BarcodeProject.web.ProductDto;
 
 import javax.persistence.Column;
 
+import com.barcode.BarcodeProject.model.Category;
+
 public class ProductCreateOrUpdateDto {
 
     private String name;
-    private String category;
+    private Category category;
     private String factory;
     private String image;
-
+    private int points;
     public String getName() {
         return name;
     }
@@ -17,11 +19,19 @@ public class ProductCreateOrUpdateDto {
         this.name = name;
     }
 
-    public String getCategory() {
+    public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -48,6 +58,7 @@ public class ProductCreateOrUpdateDto {
         sb.append(", category='").append(category).append('\'');
         sb.append(", factory='").append(factory).append('\'');
         sb.append(", image='").append(image).append('\'');
+        sb.append(", points='").append(points).append('\'');
         sb.append('}');
         return sb.toString();
     }

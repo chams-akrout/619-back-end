@@ -11,12 +11,16 @@ public class Product implements Serializable {
     private int id;
     @Column(name="name")
     private String name;
-    @Column(name="category")
-    private String category;
     @Column(name="factory")
     private String factory;
     @Column(name="image")
     private String image;
+    @Column(name="points")
+    private int points;
+    
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
 
     public int getId() {
         return id;
@@ -26,7 +30,15 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -34,11 +46,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -66,6 +78,7 @@ public class Product implements Serializable {
         sb.append(", category='").append(category).append('\'');
         sb.append(", factory='").append(factory).append('\'');
         sb.append(", image='").append(image).append('\'');
+        sb.append(", points='").append(points).append('\'');
         sb.append('}');
         return sb.toString();
     }

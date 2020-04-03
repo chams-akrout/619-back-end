@@ -2,6 +2,7 @@ package com.barcode.BarcodeProject.web.impl;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
 import com.barcode.BarcodeProject.dao.IProductDao;
+import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.model.Product;
 import com.barcode.BarcodeProject.web.IProductApi;
 import com.barcode.BarcodeProject.web.ProductDto.ProductCreateOrUpdateDto;
@@ -129,7 +130,7 @@ public class ProductApi implements IProductApi {
     }
 
     @Override
-    public ResponseEntity<?> getProductByCategory(@RequestBody String category) {
+    public ResponseEntity<?> getProductByCategory(@RequestBody Category category) {
         try {
             configureModeMapper();
             List<Product> products = productDao.findByCategory(category);
