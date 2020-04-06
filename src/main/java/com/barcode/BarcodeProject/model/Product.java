@@ -18,8 +18,7 @@ public class Product implements Serializable {
     @Column(name="points")
     private int points;
     
-    @ManyToOne
-    @JoinColumn(name="category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     public int getId() {

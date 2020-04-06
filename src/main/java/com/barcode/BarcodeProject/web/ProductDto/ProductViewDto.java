@@ -1,11 +1,12 @@
 package com.barcode.BarcodeProject.web.ProductDto;
 
 import com.barcode.BarcodeProject.model.Category;
+import com.barcode.BarcodeProject.web.CategoryDto.CategoryViewDto;
 
 public class ProductViewDto {
     private int id;
     private String name;
-    private Category category;
+    private CategoryViewDto category;
     private String factory;
     private String image;
     private int points;
@@ -33,11 +34,11 @@ public class ProductViewDto {
         this.name = name;
     }
 
-    public Category getCategory() {
+    public CategoryViewDto getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryViewDto category) {
         this.category = category;
     }
 

@@ -4,12 +4,12 @@ import java.util.List;
 
 
 import com.barcode.BarcodeProject.model.Product;
+import com.barcode.BarcodeProject.web.ProductDto.ProductViewDto;
 
 public class CategoryViewDto {
 
 	private int id;
     private String name;
-    private List<Product> products;
     
 	public int getId() {
 		return id;
@@ -23,12 +23,7 @@ public class CategoryViewDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -36,8 +31,6 @@ public class CategoryViewDto {
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
-		builder.append(", products=");
-		builder.append(products);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -3,8 +3,10 @@ package com.barcode.BarcodeProject.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,9 +21,6 @@ public class Category implements Serializable {
 	    @Column(name="name")
 	    private String name;
 	   
-	    @OneToMany(mappedBy = "category")
-	    private List<Product> products;
-
 		public int getId() {
 			return id;
 		}
@@ -38,13 +37,6 @@ public class Category implements Serializable {
 			this.name = name;
 		}
 
-		public List<Product> getProducts() {
-			return products;
-		}
-
-		public void setProducts(List<Product> products) {
-			this.products = products;
-		}
 
 		@Override
 		public String toString() {
@@ -53,8 +45,6 @@ public class Category implements Serializable {
 			builder.append(id);
 			builder.append(", name=");
 			builder.append(name);
-			builder.append(", products=");
-			builder.append(products);
 			builder.append("]");
 			return builder.toString();
 		}
