@@ -4,6 +4,7 @@ import com.barcode.BarcodeProject.common.ApiMessage;
 import com.barcode.BarcodeProject.common.ApiStatus;
 import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.model.Product;
+import com.barcode.BarcodeProject.web.CategoryDto.CategoryViewDto;
 import com.barcode.BarcodeProject.web.ProductDto.ProductCreateOrUpdateDto;
 import com.barcode.BarcodeProject.web.ProductDto.ProductViewDto;
 import io.swagger.annotations.ApiOperation;
@@ -50,6 +51,12 @@ public interface IProductApi {
     @ApiOperation(value = "Get an existing product by category", response = ProductViewDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
     public ResponseEntity<?> getProductByCategory(Category category);
+    
+    @PostMapping(path = "/products/foreignBarcode")
+    @ApiOperation(value = "Geta list of local products by foreign barcode", response = CategoryViewDto.class)
+    @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
+    public ResponseEntity<?> getLocalProductsByForeignBarcode(String foreignBarcode);
 
+   
 
 }

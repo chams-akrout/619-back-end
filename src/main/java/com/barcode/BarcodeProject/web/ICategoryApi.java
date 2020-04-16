@@ -45,6 +45,8 @@ public interface ICategoryApi {
     @ApiOperation(value = "Get an existing category by id", response = CategoryViewDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
     public ResponseEntity<?> getCategoryById(int categoryId);
+    
+    
 
 	
 	
