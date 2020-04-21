@@ -7,6 +7,7 @@ import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.model.Product;
 import com.barcode.BarcodeProject.web.IProductApi;
 import com.barcode.BarcodeProject.web.CategoryDto.CategoryViewDto;
+import com.barcode.BarcodeProject.web.ProductDto.ForeignBarCodeDto;
 import com.barcode.BarcodeProject.web.ProductDto.ProductCreateOrUpdateDto;
 import com.barcode.BarcodeProject.web.ProductDto.ProductViewDto;
 import com.google.gson.Gson;
@@ -158,10 +159,10 @@ public class ProductApi implements IProductApi {
 	}
 
 	@Override
-	public ResponseEntity<?> getLocalProductsByForeignBarcode(@RequestBody String foreignBarcode) {
+	public ResponseEntity<?> getLocalProductsByForeignBarcode(@RequestBody ForeignBarCodeDto foreignBarcodeDto) {
 		try {
 			configureModeMapper();
-			StringBuilder urlBuilder = constuctUrl(foreignBarcode);
+			StringBuilder urlBuilder = constuctUrl(foreignBarcodeDto.getBarcode());
 			String rep=	restTemplate.getForObject(urlBuilder.toString(),String.class);
 			String name = extractCategoryName(rep);
 			Category categoryfromDB=categoryDao.findAll().stream().filter(c->name.contains(c.getName())).collect(Collectors.toList()).get(0);
