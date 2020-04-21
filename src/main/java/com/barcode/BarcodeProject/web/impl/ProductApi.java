@@ -162,11 +162,7 @@ public class ProductApi implements IProductApi {
 	public ResponseEntity<?> getLocalProductsByForeignBarcode(@RequestBody ForeignBarCodeDto foreignBarcodeDto) {
 		try {
 			configureModeMapper();
-			StringBuilder urlBuilder = constuctUrl(foreignBarcodeDto.getBarcode());
-			String rep=	restTemplate.getForObject(urlBuilder.toString(),String.class);
-			String name = extractCategoryName(rep);
-			Category categoryfromDB=categoryDao.findAll().stream().filter(c->name.contains(c.getName())).collect(Collectors.toList()).get(0);
-			List<Product> products=productDao.findByCategory(categoryfromDB);
+			List<Product> products = getCategoryFromBarcode(foreignBarcodeDto.getBarcode());
 			httpResponseBody = products.stream().map(product->modelMapper.map(product,ProductViewDto.class)).collect(Collectors.toList());
 			httpStatus = HttpStatus.OK;
 		} catch (Exception e) {
@@ -174,6 +170,29 @@ public class ProductApi implements IProductApi {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<>(httpResponseBody, httpStatus);
+	}
+	
+	@Override
+	public ResponseEntity<?> getLocalProductsByStringForeignBarcode(@RequestBody String foreignBarcode) {
+		try {
+			configureModeMapper();
+			List<Product> products = getCategoryFromBarcode(foreignBarcode);
+			httpResponseBody = products.stream().map(product->modelMapper.map(product,ProductViewDto.class)).collect(Collectors.toList());
+			httpStatus = HttpStatus.OK;
+		} catch (Exception e) {
+			httpResponseBody = ApiMessage.SERVER_ERROR_OCCURED;
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<>(httpResponseBody, httpStatus);
+	}
+
+	private List<Product> getCategoryFromBarcode(String barcode) {
+		StringBuilder urlBuilder = constuctUrl(barcode);
+		String rep=	restTemplate.getForObject(urlBuilder.toString(),String.class);
+		String name = extractCategoryName(rep);
+		Category categoryfromDB=categoryDao.findAll().stream().filter(c->name.contains(c.getName())).collect(Collectors.toList()).get(0);
+		List<Product> products=productDao.findByCategory(categoryfromDB);
+		return products;
 	}
 
 	private String extractCategoryName(String rep) {
@@ -197,4 +216,6 @@ public class ProductApi implements IProductApi {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 	}
+
+	
 }
