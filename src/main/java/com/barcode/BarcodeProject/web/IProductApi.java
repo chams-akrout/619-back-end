@@ -54,15 +54,23 @@ public interface IProductApi {
     public ResponseEntity<?> getProductByCategory(Category category);
     
     @PostMapping(path = "/products/foreignBarcode")
-    @ApiOperation(value = "Geta list of local products by foreign barcode", response = CategoryViewDto.class)
+    @ApiOperation(value = "Get a list of local products by foreign barcode", response = CategoryViewDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
     public ResponseEntity<?> getLocalProductsByForeignBarcode(ForeignBarCodeDto foreignBarcode);
     
     @PostMapping(path = "/products/stringForeignBarcode")
-    @ApiOperation(value = "Geta list of local products by string foreign barcode", response = CategoryViewDto.class)
+    @ApiOperation(value = "Get a list of local products by string foreign barcode", response = CategoryViewDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
     public ResponseEntity<?> getLocalProductsByStringForeignBarcode(String foreignBarcode);
 
-   
+    @PutMapping(path = "/products/productAddScore/{productId}")
+    @ApiOperation(value = "Update an existing product by adding value to its score", response = ProductViewDto.class)
+    @ApiResponses(value = {@ApiResponse(code = ApiStatus.ACCEPTED, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
+    public ResponseEntity<?> updateProductAddScore(ProductCreateOrUpdateDto product , int productId);
+    
+    @PutMapping(path = "/products/productSubstractScore/{productId}")
+    @ApiOperation(value = "Update an existing product by substracting value from its score", response = ProductViewDto.class)
+    @ApiResponses(value = {@ApiResponse(code = ApiStatus.ACCEPTED, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
+    public ResponseEntity<?> updateProductSubstractScore(ProductCreateOrUpdateDto product , int productId);
 
 }

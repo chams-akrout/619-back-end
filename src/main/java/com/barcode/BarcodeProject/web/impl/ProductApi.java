@@ -185,7 +185,54 @@ public class ProductApi implements IProductApi {
 		}
 		return new ResponseEntity<>(httpResponseBody, httpStatus);
 	}
+	@Override
+	public ResponseEntity<?> updateProductAddScore(@RequestBody ProductCreateOrUpdateDto product,@PathVariable  int productId) {
+		try {
+			configureModeMapper();
+			Optional<Product> existingProduct = productDao.findById(productId);
+			if (existingProduct.isPresent()) {
+				Product productToBeUpdated = modelMapper.map(product, Product.class);
+				productToBeUpdated.setId(productId);
+				productToBeUpdated.setPoints(productToBeUpdated.getPoints()+3);
+				Product updatedProduct = productDao.save(productToBeUpdated);
+				httpResponseBody = modelMapper.map(updatedProduct, ProductViewDto.class);
+				httpStatus = HttpStatus.OK;
+			} else {
+				httpResponseBody = ApiMessage.PRODUCT_NOT_FOUND;
+				httpStatus = HttpStatus.NOT_FOUND;
+			}
 
+		} catch (Exception e) {
+			httpResponseBody = ApiMessage.SERVER_ERROR_OCCURED;
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<>(httpResponseBody, httpStatus);
+	}
+	
+	@Override
+	public ResponseEntity<?> updateProductSubstractScore(@RequestBody ProductCreateOrUpdateDto product,@PathVariable  int productId) {
+		try {
+			configureModeMapper();
+			Optional<Product> existingProduct = productDao.findById(productId);
+			if (existingProduct.isPresent()) {
+				Product productToBeUpdated = modelMapper.map(product, Product.class);
+				productToBeUpdated.setId(productId);
+				productToBeUpdated.setPoints(productToBeUpdated.getPoints()-2);
+				Product updatedProduct = productDao.save(productToBeUpdated);
+				httpResponseBody = modelMapper.map(updatedProduct, ProductViewDto.class);
+				httpStatus = HttpStatus.OK;
+			} else {
+				httpResponseBody = ApiMessage.PRODUCT_NOT_FOUND;
+				httpStatus = HttpStatus.NOT_FOUND;
+			}
+
+		} catch (Exception e) {
+			httpResponseBody = ApiMessage.SERVER_ERROR_OCCURED;
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<>(httpResponseBody, httpStatus);
+	}
+	
 	private List<Product> getCategoryFromBarcode(String barcode) {
 		StringBuilder urlBuilder = constuctUrl(barcode);
 		String rep=	restTemplate.getForObject(urlBuilder.toString(),String.class);
@@ -216,6 +263,8 @@ public class ProductApi implements IProductApi {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 	}
+
+	
 
 	
 }
