@@ -13,7 +13,8 @@ public interface UserService {
 	List<User> findAll();
 
 	User getUserByEmail(String email);
-
+    
+	//User updateUserScore(User user, int id);
 	
 	
 }
