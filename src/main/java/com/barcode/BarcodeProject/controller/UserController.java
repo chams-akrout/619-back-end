@@ -52,7 +52,8 @@ public class UserController {
 			if (existingUser.isPresent()) {
 				User userToBeUpdated = modelMapper.map(user, User.class);
 				userToBeUpdated.setId(userId);
-				userToBeUpdated.setScore(userToBeUpdated.getScore()+5);;
+				userToBeUpdated.setScore(userToBeUpdated.getScore()+5);
+				userToBeUpdated.setEnabled(true);
 				User updatedUser = userDao.save(userToBeUpdated);
 				httpResponseBody = modelMapper.map(updatedUser, UserViewDto.class);
 				httpStatus = HttpStatus.OK;
