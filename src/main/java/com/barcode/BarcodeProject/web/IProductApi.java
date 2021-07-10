@@ -2,10 +2,10 @@ package com.barcode.BarcodeProject.web;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
 import com.barcode.BarcodeProject.common.ApiStatus;
-import com.barcode.BarcodeProject.dto.CategoryDto.CategoryDto;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto.CategoryDto;
 import com.barcode.BarcodeProject.model.Category;
-import com.barcode.BarcodeProject.dto.ProductDto.ForeignBarCodeDto;
-import com.barcode.BarcodeProject.dto.ProductDto.ProductDto;
+import com.barcode.BarcodeProject.dto.productDto.ForeignBarCodeDto;
+import com.barcode.BarcodeProject.dto.productDto.ProductDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

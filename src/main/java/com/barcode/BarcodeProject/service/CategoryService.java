@@ -1,7 +1,8 @@
 package com.barcode.BarcodeProject.service;
 
 import com.barcode.BarcodeProject.dao.ICategoryDao;
-import com.barcode.BarcodeProject.dto.CategoryDto.CategoryDto;
+
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 import com.barcode.BarcodeProject.mapper.CategoryMapper;
 import com.barcode.BarcodeProject.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;

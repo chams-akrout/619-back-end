@@ -1,7 +1,7 @@
 package com.barcode.BarcodeProject.web.impl;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
-import com.barcode.BarcodeProject.dto.CategoryDto.CategoryDto;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 import com.barcode.BarcodeProject.service.CategoryService;
 import com.barcode.BarcodeProject.web.ICategoryApi;
 import io.swagger.annotations.Api;

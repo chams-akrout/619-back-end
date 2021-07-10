@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
 import com.barcode.BarcodeProject.common.ApiStatus;
-import com.barcode.BarcodeProject.dto.CategoryDto.CategoryDto;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

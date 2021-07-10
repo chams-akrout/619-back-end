@@ -2,8 +2,8 @@ package com.barcode.BarcodeProject.service;
 
 import com.barcode.BarcodeProject.dao.ICategoryDao;
 import com.barcode.BarcodeProject.dao.IProductDao;
-import com.barcode.BarcodeProject.dto.ProductDto.ForeignBarCodeDto;
-import com.barcode.BarcodeProject.dto.ProductDto.ProductDto;
+import com.barcode.BarcodeProject.dto.productDto.ForeignBarCodeDto;
+import com.barcode.BarcodeProject.dto.productDto.ProductDto;
 import com.barcode.BarcodeProject.mapper.ProductMapper;
 import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.model.Product;

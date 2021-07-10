@@ -1,8 +1,8 @@
 package com.barcode.BarcodeProject.web.impl;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
-import com.barcode.BarcodeProject.dto.ProductDto.ForeignBarCodeDto;
-import com.barcode.BarcodeProject.dto.ProductDto.ProductDto;
+import com.barcode.BarcodeProject.dto.productDto.ForeignBarCodeDto;
+import com.barcode.BarcodeProject.dto.productDto.ProductDto;
 import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.service.ProductService;
 import com.barcode.BarcodeProject.web.IProductApi;

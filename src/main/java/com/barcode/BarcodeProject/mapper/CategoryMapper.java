@@ -1,6 +1,6 @@
 package com.barcode.BarcodeProject.mapper;
 
-import com.barcode.BarcodeProject.dto.CategoryDto.CategoryDto;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 import com.barcode.BarcodeProject.model.Category;
 
 public final class CategoryMapper {
