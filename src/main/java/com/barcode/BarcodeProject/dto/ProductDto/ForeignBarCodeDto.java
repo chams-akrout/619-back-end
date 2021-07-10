@@ -1,4 +1,4 @@
-package com.barcode.BarcodeProject.web.ProductDto;
+package com.barcode.BarcodeProject.dto.ProductDto;
 
 public class ForeignBarCodeDto {
 	private String barcode;

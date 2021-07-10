@@ -9,7 +9,4 @@ import com.barcode.BarcodeProject.model.Category;
 @Repository
 public interface ICategoryDao extends JpaRepository<Category, Integer>{
 
-    Category findByNameLike(String name);
-    @Query("from category c where c.name LIKE CONCAT('%',?1,'%')")
-    Category searchByCategoryName(String name);
 }
