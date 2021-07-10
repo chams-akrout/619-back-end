@@ -1,5 +1,10 @@
 package com.barcode.BarcodeProject.model;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,41 +18,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity(name = "category")
+@Data
+@ToString
+@NoArgsConstructor
+@Builder
 public class Category implements Serializable {
-	    @Id
-	    @GeneratedValue (strategy= GenerationType.AUTO)
-	    private int id;
-	    
-	    @Column(name="name")
-	    private String name;
-	   
-		public int getId() {
-			return id;
-		}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(name = "name")
+    private String name;
 
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("Category [id=");
-			builder.append(id);
-			builder.append(", name=");
-			builder.append(name);
-			builder.append("]");
-			return builder.toString();
-		}
-	    
-	    
 }
