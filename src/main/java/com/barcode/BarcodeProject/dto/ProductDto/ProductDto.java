@@ -1,6 +1,4 @@
-package com.barcode.BarcodeProject.web.ProductDto;
-
-import javax.persistence.Column;
+package com.barcode.BarcodeProject.dto.ProductDto;
 
 import com.barcode.BarcodeProject.model.Category;
 

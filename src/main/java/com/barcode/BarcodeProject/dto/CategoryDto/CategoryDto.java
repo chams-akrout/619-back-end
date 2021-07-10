@@ -1,8 +1,4 @@
-package com.barcode.BarcodeProject.web.CategoryDto;
-
-import java.util.List;
-
-import com.barcode.BarcodeProject.model.Product;
+package com.barcode.BarcodeProject.dto.CategoryDto;
 
 public class CategoryCreateOrUpdateDto {
 
