@@ -1,6 +1,6 @@
 package com.barcode.BarcodeProject.mapper;
 
-import com.barcode.BarcodeProject.dto.ProductDto.ProductDto;
+import com.barcode.BarcodeProject.dto.productDto.ProductDto;
 import com.barcode.BarcodeProject.model.Product;
 
 public final class ProductMapper {
