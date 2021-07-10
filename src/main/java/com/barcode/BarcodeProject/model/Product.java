@@ -1,9 +1,6 @@
 package com.barcode.BarcodeProject.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +9,7 @@ import java.io.Serializable;
 @Data
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Product implements Serializable {
     @Id
@@ -26,6 +24,7 @@ public class Product implements Serializable {
     @Column(name = "points")
     private int points;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
     private Category category;
 
 

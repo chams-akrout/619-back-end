@@ -9,7 +9,6 @@ import lombok.ToString;
 
 @Data
 @ToString
-@NoArgsConstructor
 @Builder
 public class ProductDto {
 

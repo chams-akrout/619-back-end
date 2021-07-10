@@ -2,7 +2,7 @@ package com.barcode.BarcodeProject.web;
 
 import com.barcode.BarcodeProject.common.ApiMessage;
 import com.barcode.BarcodeProject.common.ApiStatus;
-import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto.CategoryDto;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 import com.barcode.BarcodeProject.model.Category;
 import com.barcode.BarcodeProject.dto.productDto.ForeignBarCodeDto;
 import com.barcode.BarcodeProject.dto.productDto.ProductDto;
