@@ -142,9 +142,9 @@ public class ProductApi implements IProductApi {
     }
 
     @Override
-    public ResponseEntity<?> getLocalProductsByStringForeignBarcode(@RequestBody String foreignBarcode) {
+    public ResponseEntity<?> getLocalProductsByLongForeignBarcode(@RequestBody long foreignBarcode) {
         try {
-            httpResponseBody = productService.getLocalProductsByStringForeignBarcode(foreignBarcode);
+            httpResponseBody = productService.getLocalProductsByLongForeignBarcode(foreignBarcode);
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {
             httpResponseBody = ApiMessage.SERVER_ERROR_OCCURED;

@@ -51,9 +51,9 @@ public interface IProductApi {
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
     public ResponseEntity<?> getLocalProductsByForeignBarcode(ForeignBarCodeDto foreignBarcode);
     
-    @PostMapping(path = "/products/stringForeignBarcode")
-    @ApiOperation(value = "Get a list of local products by string foreign barcode", response = CategoryDto.class)
+    @PostMapping(path = "/products/longForeignBarcode")
+    @ApiOperation(value = "Get a list of local products by long foreign barcode", response = CategoryDto.class)
     @ApiResponses(value = {@ApiResponse(code = ApiStatus.STATUS_OK, message = ApiMessage.SUCCESSFUL_OPERATION, responseContainer = "List")})
-    public ResponseEntity<?> getLocalProductsByStringForeignBarcode(String foreignBarcode);
+    public ResponseEntity<?> getLocalProductsByLongForeignBarcode(long foreignBarcode);
     
 }

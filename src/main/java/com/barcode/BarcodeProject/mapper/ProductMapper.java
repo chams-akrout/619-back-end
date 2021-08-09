@@ -12,7 +12,6 @@ public final class ProductMapper {
                 .factory(productDto.getFactory())
                 .image(productDto.getImage())
                 .points(productDto.getPoints())
-                .category(productDto.getCategory())
                 .build();
     }
 
@@ -23,7 +22,8 @@ public final class ProductMapper {
                 .factory(product.getFactory())
                 .image(product.getImage())
                 .points(product.getPoints())
-                .category(product.getCategory())
+                .category(CategoryMapper.toCategoryDto(product.getCategory()))
+                .categoryId(product.getCategory().getId())
                 .build();
     }
 

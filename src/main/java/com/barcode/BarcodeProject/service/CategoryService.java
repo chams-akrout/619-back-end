@@ -7,6 +7,7 @@ import com.barcode.BarcodeProject.mapper.CategoryMapper;
 import com.barcode.BarcodeProject.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,6 +34,7 @@ public class CategoryService {
     public Optional<CategoryDto> update(CategoryDto categoryDto, int id){
         Optional <Category> existingCategory= categoryDao.findById(id);
         if(existingCategory.isPresent()){
+            categoryDto.setId(id);
             Category updatedCategory = categoryDao.save(CategoryMapper.toCategory(categoryDto));
             return Optional.of(CategoryMapper.toCategoryDto(updatedCategory));
         }
@@ -53,4 +55,12 @@ public class CategoryService {
         return existingCategory.map(CategoryMapper::toCategoryDto);
     }
 
+    public Optional<Category> findCategory(int id) {
+        return categoryDao.findById(id);
+    }
+
+    @Transactional
+    public void deleteAll() {
+        categoryDao.deleteAll();
+    }
 }
