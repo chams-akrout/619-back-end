@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -29,6 +30,8 @@ public class ProductService {
     private ICategoryDao categoryDao;
 
     @Autowired
+    CategoryService categoryService;
+    @Autowired
     RestTemplate restTemplate;
     @Value("${barcode.api.key}")
     String apiKey;
@@ -41,10 +44,14 @@ public class ProductService {
     }
 
     public ProductDto save(ProductDto productDto) {
-        Product savedProduct = productDao.save(ProductMapper.toProduct(productDto));
+        Optional<Category> category = categoryService.findCategory(productDto.getCategoryId());
+        Product productToBeSaved = ProductMapper.toProduct(productDto);
+        productToBeSaved.setCategory(category.orElse(null));
+        Product savedProduct = productDao.save(productToBeSaved);
         return ProductMapper.toProductDto(savedProduct);
     }
 
+    @Transactional
     public List<ProductDto> findAll() {
         List<Product> products = productDao.findAll();
         return !products.isEmpty() ? products.stream()
@@ -53,8 +60,13 @@ public class ProductService {
 
     public Optional<ProductDto> update(ProductDto productDto, int id) {
         Optional<Product> existingProduct = productDao.findById(id);
+        Optional<Category> category = categoryService.findCategory(productDto.getCategoryId());
+        Product productToBeSaved = ProductMapper.toProduct(productDto);
+        productToBeSaved.setCategory(category.orElse(null));
+        productToBeSaved.setId(id);
         if (existingProduct.isPresent()) {
-            Product updatedProduct = productDao.save(ProductMapper.toProduct(productDto));
+
+            Product updatedProduct = productDao.save(productToBeSaved);
             return Optional.of(ProductMapper.toProductDto(updatedProduct));
         }
         return Optional.empty();
@@ -74,6 +86,7 @@ public class ProductService {
         return false;
     }
 
+    @Transactional
     public List<ProductDto> getLocalProductsByForeignBarcode(ForeignBarCodeDto foreignBarcodeDto) {
         List<Product> products = getCategoryFromBarcode(foreignBarcodeDto.getBarcode());
         return !products.isEmpty() ? products.stream()
@@ -81,28 +94,28 @@ public class ProductService {
 
     }
 
-    public List<ProductDto> getLocalProductsByStringForeignBarcode(String foreignBarcode) {
-        List<Product> products = getCategoryFromBarcode(foreignBarcode);
+    public List<ProductDto> getLocalProductsByLongForeignBarcode(long foreignBarcode) {
+        List<Product> products = getCategoryFromBarcode(String.valueOf(foreignBarcode));
         return !products.isEmpty() ? products.stream()
                 .map(ProductMapper::toProductDto).collect(Collectors.toList()) : Collections.emptyList();
 
     }
 
     private List<Product> getCategoryFromBarcode(String barcode) {
-        StringBuilder urlBuilder = constuctUrl(barcode);
+        StringBuilder urlBuilder = constructUrl(barcode);
         String rep = restTemplate.getForObject(urlBuilder.toString(), String.class);
         String name = extractCategoryName(rep);
-        Category categoryfromDB = categoryDao.findAll().stream().filter(c -> name.contains(c.getName())).collect(Collectors.toList()).get(0);
-        return productDao.findByCategory(categoryfromDB);
+        Category categoryFromDB = categoryDao.findAll().stream().filter(c -> name.contains(c.getName())).collect(Collectors.toList()).get(0);
+        return productDao.findByCategory(categoryFromDB);
     }
 
     private String extractCategoryName(String rep) {
         JsonObject jsonResponse = new Gson().fromJson(rep, JsonObject.class);
         String[] category = jsonResponse.get("products").getAsJsonArray().get(0).getAsJsonObject().get("category").getAsString().split(">");
-        return category[category.length - 1];
+        return category[0];
     }
 
-    private StringBuilder constuctUrl(String foreignBarcode) {
+    private StringBuilder constructUrl(String foreignBarcode) {
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append("https://api.barcodelookup.com/v2/products?");
         urlBuilder.append("barcode=");
@@ -112,5 +125,9 @@ public class ProductService {
         return urlBuilder;
     }
 
+    @Transactional
+    public void deleteAll() {
+        productDao.deleteAll();
+    }
 
 }

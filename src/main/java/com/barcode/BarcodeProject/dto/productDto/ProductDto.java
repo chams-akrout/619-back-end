@@ -1,9 +1,8 @@
 package com.barcode.BarcodeProject.dto.productDto;
 
-import com.barcode.BarcodeProject.model.Category;
+import com.barcode.BarcodeProject.dto.categoryDto.CategoryDto;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
@@ -17,6 +16,7 @@ public class ProductDto {
     private String factory;
     private String image;
     private int points;
-    private Category category;
+    private CategoryDto category;
+    private int categoryId;
 
 }
